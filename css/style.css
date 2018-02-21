@@ -1699,3 +1699,12 @@ i.icon-white {
 		width: 100%;
 	}
 }
+
+/*iframe*/
+iframe:focus {
+    outline: none;
+}
+
+iframe[seamless] {
+    display: block;
+}
