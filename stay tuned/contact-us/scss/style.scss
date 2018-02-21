@@ -1,0 +1,136 @@
+$col-primary: #29e3dc;
+
+%shadowed {
+	box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+}
+
+%clearfix {
+	&:after {
+		content: '';
+		display: table;
+		clear: both;
+	}
+}
+
+body {
+	background: #eff6f8;
+	font-family: Roboto, Helvetica, sans-serif;
+	font-weight: 400;
+	font-size: 18px;
+}
+
+.container {
+	width: 580px;
+	margin: 40px auto;
+}
+
+.card {
+	@extend %shadowed;
+	@extend %clearfix;
+	
+	display: block;
+	width: 100%;
+	position: relative;
+	background: white;
+	z-index: 0;
+	
+	&__heading {
+		@extend %shadowed;
+		
+		display: inline-block;
+		position: absolute;
+		top: -0.5em;
+		left: -0.5em;
+		padding: 14px 22px 11px;
+		text-transform: uppercase;
+		font-size: 2em;
+		font-weight: 500;
+		color: white;
+		background: $col-primary;
+	}
+}
+
+.contact {
+	&__map {
+		$circle-radius: 80px;
+		$circle-x: 184px;
+		$circle-y: 155px;
+		
+		display: block;
+		height: 100%;
+		width: 100%;
+		position: absolute;
+		z-index: -1;
+		
+		&:before,
+		&:after {
+			content: '';
+			display: block;
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		
+		&:after {
+			background: radial-gradient(ellipse $circle-radius $circle-radius at $circle-x $circle-y, rgba(white, 0.2) 99%, white 250%);
+			mix-blend-mode: saturation;
+		}
+		
+		&:before {
+			background: radial-gradient(ellipse $circle-radius $circle-radius at $circle-x $circle-y, rgba(white, 0.2) 99%, rgba(white, 0.8) 100%);
+			mix-blend-mode: screen;
+			z-index: 1;
+		}
+		
+		.map__inner {
+			width: 100%;
+			height: 100%;
+			
+			.leaflet-control-attribution {
+				opacity: 0.4;
+				
+				&:hover {
+					opacity: 0.6;
+				}
+			}
+		}
+		
+		.map__circle {
+			display: block;
+			box-sizing: border-box;
+			width: $circle-radius * 2;
+			height: $circle-radius * 2;
+			position: absolute;
+			left: $circle-x - $circle-radius;
+			top: $circle-y - $circle-radius;
+			border: 6px solid lighten($col-primary, 0%);
+			border-radius: 50%;
+			box-shadow: 0 4px 10px rgba(0,0,0,0.1), 0 4px 16px rgba(0,0,0,0.1) inset;
+			z-index: 1;
+		}
+	}
+	
+	&__content {
+		float: right;
+		padding: 30px 50px;
+		line-height: 1.35;
+	}
+}
+
+dt {
+	margin-top: 1.35em;
+	
+	&:first-child {
+		margin-top: 0;
+	}
+}
+
+dt {
+	color: #818181;
+}
+
+dd {
+	color: darken($col-primary, 10%);
+}
